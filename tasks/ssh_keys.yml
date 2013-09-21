@@ -1,0 +1,14 @@
+---
+- name: Install the SSH keys
+  tags: ssh_keys
+  authorized_key: user={{ item[0].name }} key="{{ item[1] }}"
+  with_nested:
+    - users
+    - ssh_keys
+  when: users is defined and ssh_keys is defined
+
+- name: Install the specific keys
+  tags: ssh_keys
+  authorized_key: user={{ item.user }} key="{{ item.key }}"
+  with_items: specific_ssh_keys
+  when: specific_ssh_keys is defined

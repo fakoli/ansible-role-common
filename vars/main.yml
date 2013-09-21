@@ -1,0 +1,7 @@
+system_packages:
+  - zsh
+  - git
+  - python-apt
+  - python-software-properties
+  - locales-all
+  - htop

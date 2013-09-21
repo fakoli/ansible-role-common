@@ -1,0 +1,9 @@
+---
+- name: Install tmux
+  tags: tmux
+  apt: pkg=tmux state=installed
+
+- name: Install the tmux configuration for every user
+  tags: tmux
+  copy: src=tmux/tmux.conf dest={{ item.home }}/.tmux.conf owner={{ item.name }} group={{ item.name }} mode=0644
+  with_items: users

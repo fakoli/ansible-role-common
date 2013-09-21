@@ -1,0 +1,20 @@
+---
+- name: Install default packages
+  apt: pkg={{ item }} state=installed
+  with_items: ${system_packages}
+
+# Repositories
+- include: dotdeb.yml
+
+# System stuff
+- include: hostname.yml
+- include: timezone.yml
+
+# Users stuff
+- include: users.yml
+- include: ssh_keys.yml
+- include: prezto.yml
+- include: tmux.yml
+
+# Services
+- include: ntp.yml

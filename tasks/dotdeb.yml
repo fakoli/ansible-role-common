@@ -1,0 +1,8 @@
+---
+- name: Add Dotdeb repository
+  tags: dotdeb
+  apt_repository: repo="deb http://packages.dotdeb.org wheezy all" state=present
+
+- name: Add Dotdeb repository key
+  tags: dotdeb
+  apt_key: url=http://www.dotdeb.org/dotdeb.gpg state=present

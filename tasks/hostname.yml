@@ -1,0 +1,16 @@
+---
+- name: Create /etc/hostname
+  tags: hostname
+  copy: content="{{ hostname }}" dest=/etc/hostname
+  when: hostname is defined
+
+- name: Change the hostname in /etc/hosts
+  tags: hostname
+  lineinfile: dest=/etc/hosts regexp="^127.0.1.1" line="127.0.1.1 {{ hostname }}"
+  when: hostname is defined
+  register: _hostname
+
+- name: Set the hostname
+  tags: hostname
+  command: hostname {{ hostname }}
+  when: hostname is defined and _hostname.changed

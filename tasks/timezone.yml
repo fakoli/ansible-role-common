@@ -1,0 +1,10 @@
+---
+- name: Set /etc/timezone
+  tags: timezone
+  copy: src=system/timezone dest=/etc/timezone
+  register: _timezone
+
+- name: Set the timezone
+  tags: timezone
+  command: dpkg-reconfigure -f noninteractive tzdata
+  when: _timezone.changed

@@ -1,0 +1,5 @@
+---
+- name: Install NTP
+  tags: ntp
+  apt: pkg=ntp state=latest
+  notify: ntp restart
