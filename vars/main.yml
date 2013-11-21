@@ -3,5 +3,10 @@ system_packages:
   - git
   - python-apt
   - python-software-properties
-  - locales-all
   - htop
+
+debian_system_packages:
+  - locales-all
+
+ubuntu_system_packages:
+  - locales

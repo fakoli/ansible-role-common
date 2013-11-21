@@ -5,6 +5,14 @@
   with_items: users
   when: users is defined
 
+- name: Create the user SSH directory
+  tags: users
+  file: dest={{ item.home }}/.ssh owner={{ item.name }} group={{ item.name }} state=directory
+  with_items: users
+  when: users is defined
+
 - name: Set the SSH configuration file
   tags: users
-  copy: src=ssh_config dest=/root/.ssh/config owner=root group=root mode=0600
+  copy: src=ssh_config dest={{ item.home }}/.ssh/config owner={{ item.name }} group={{ item.name }} mode=0600
+  with_items: users
+  when: users is defined

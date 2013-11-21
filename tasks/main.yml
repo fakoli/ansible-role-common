@@ -3,6 +3,16 @@
   apt: pkg={{ item }} state=installed
   with_items: ${system_packages}
 
+- name: Install Debian specific packages
+  apt: pkg={{ item }} state=latest
+  with_items: debian_system_packages
+  when: ansible_lsb.id == 'Debian'
+
+- name: Install Ubuntu specific packages
+  apt: pkg={{ item }} state=latest
+  with_items: ubuntu_system_packages
+  when: ansible_lsb.id == 'Ubuntu'
+
 # Repositories
 - include: dotdeb.yml
 
