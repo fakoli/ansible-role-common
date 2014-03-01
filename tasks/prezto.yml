@@ -3,31 +3,37 @@
   tags: prezto
   git: repo=https://github.com/sorin-ionescu/prezto.git dest={{ item.home }}/.zprezto update=no
   with_items: users
+  when: users is defined
 
 - name: Set the correct permissions on the Prezto working repository
   tags: prezto
   file: dest={{ item.home }}/.zprezto owner={{ item.name }} group={{ item.name }} state=directory
   with_items: users
+  when: users is defined
 
 - name: Link zlogin for Prezto
   tags: prezto
   file: src={{ item.home }}/.zprezto/runcoms/zlogin dest={{ item.home }}/.zlogin owner={{ item.name }} group={{ item.name }} state=link
   with_items: users
+  when: users is defined
 
 - name: Link zlogout for Prezto
   tags: prezto
   file: src={{ item.home }}/.zprezto/runcoms/zlogout dest={{ item.home }}/.zlogout owner={{ item.name }} group={{ item.name }} state=link
   with_items: users
+  when: users is defined
 
 - name: Create zpreztorc
   tags: prezto
   template: src=zsh/zpreztorc.j2 dest={{ item.home }}/.zpreztorc owner={{ item.name }} group={{ item.name }}
   with_items: users
+  when: users is defined
 
 - name: Install Sphax Prezto theme
   tags: prezto
   copy: src=zsh/sphax_theme dest={{ item.home }}/.zprezto/modules/prompt/functions/prompt_sphax_setup owner={{ item.name }} group={{ item.name }}
   with_items: users
+  when: users is defined
 
 - name: Link needed files for Prezto
   tags: prezto
@@ -35,3 +41,4 @@
   with_nested:
     - users
     - { zprofile, zshenv, zshrc }
+  when: users is defined

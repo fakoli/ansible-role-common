@@ -7,3 +7,4 @@
   tags: tmux
   copy: src=tmux/tmux.conf dest={{ item.home }}/.tmux.conf owner={{ item.name }} group={{ item.name }} mode=0644
   with_items: users
+  when: users is defined
